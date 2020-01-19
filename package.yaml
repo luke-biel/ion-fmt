@@ -1,10 +1,10 @@
 name:                ion-fmt
 version:             0.1.0.0
-github:              "Github username here/ion-fmt"
-license:             BSD3
-author:              "Author name here"
-maintainer:          "Author email here"
-copyright:           "2019 Author name here"
+github:              "luke-biel/ion-fmt"
+license:             MIT
+author:              "Łukasz Biel"
+maintainer:          "lukasz.p.biel@gmail.com"
+copyright:           "2020 Łukasz Biel"
 
 extra-source-files:
 - README.md
