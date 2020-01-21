@@ -1,4 +1,4 @@
-module Lib where
+module Lib (formatString, splitPerSection, isSectionHeader) where
 
 import Data.List (isPrefixOf, intercalate, dropWhileEnd)
 import Data.List.Split (splitOn)
