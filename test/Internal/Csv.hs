@@ -1,16 +1,16 @@
 module Internal.Csv where
 
-import Test.Hspec
-import IonFmt.Internal.Csv
+import           IonFmt.Internal.Csv
+import           Test.Hspec
 
--- splitCsvLine String -> [String]
+-- splitCsvLine :: String -> [String]
 specSplitCsvLine = do
   it "should split properly formatted CSV with edge delimiters"   $ f "| this | is | CSV |" ["this", "is", "CSV"]
   it "should remove tail and head in CSV with no edge delimiters" $ f "\"this is\" | not | ion | CSV " ["not", "ion"]
   where
     f input expected = splitCsvLine input `shouldBe` expected
 
--- getCsvLengths [String] -> [Int]
+-- getCsvLengths :: [String] -> [Int]
 specCsvLengths = do
   it "should compute line lengths excluding trailing and leading whitespaces" $ f
       ["| this | is | CSV |"]

@@ -3,7 +3,7 @@ module Internal.Utils where
 import           IonFmt.Internal.Utils
 import           Test.Hspec
 
--- isSectionHeader String -> Bool
+-- isSectionHeader :: String -> Bool
 specIsSectionHeader = do
   it "should properly recognize ion section headers" $ f  "[CONTRACT]"
   it "should properly recognize ion lines"           $ f' "| \"text\" | 3.14 |"
@@ -14,7 +14,7 @@ specIsSectionHeader = do
     f str = str `shouldSatisfy` isSectionHeader
     f' str = str `shouldNotSatisfy` isSectionHeader
 
--- strip String -> String
+-- strip :: String -> String
 specStrip = do
   it "should not strip correct strings" $ f "correct" "correct"
   it "should not strip empty string"    $ f "" ""
@@ -23,7 +23,7 @@ specStrip = do
   where
     f input expected = strip input `shouldBe` expected
 
--- isCsvLine String -> Bool
+-- isCsvLine :: String -> Bool
 specIsCsvLine = do
   it "should correctly recognize ion CSV lines"                    $ f  "| this | is | CSV |"
   it "should correctly mark comments as invalid"                   $ f' "# this is comment"

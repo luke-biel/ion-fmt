@@ -1,15 +1,20 @@
-import Internal.Utils
+import Internal
 import Internal.Csv
+import Internal.Utils
 import Test.Hspec
 
 main :: IO ()
-main = hspec $ do
-  describe "IonFmt.Internal.Utils" $ do
-    context "#isSectionHeader" specIsSectionHeader
-    context "#isCsvLine" specIsCsvLine
-    context "#strip" specStrip
-    context "#cellLength" specCellLength
-  describe "IonFmt.Internal.Csv" $ do
-    context "#splitCsvLine" specSplitCsvLine
-    context "#csvLengths" specCsvLengths
-    context "#cellLengths" specCellLengths
+main =
+  hspec $
+  describe "IonFmt" $
+  describe "Internal" $ do
+    context "#writeWithLengths" specWriteWithLengths
+    describe "Utils" $ do
+      context "#isSectionHeader" specIsSectionHeader
+      context "#isCsvLine" specIsCsvLine
+      context "#strip" specStrip
+      context "#cellLength" specCellLength
+    describe "Csv" $ do
+      context "#splitCsvLine" specSplitCsvLine
+      context "#csvLengths" specCsvLengths
+      context "#cellLengths" specCellLengths
