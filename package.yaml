@@ -21,12 +21,11 @@ description:         Please see the README on GitHub at <https://github.com/Gith
 
 dependencies:
 - base >= 4.7 && < 5
-- split >= 0.2 && < 0.3
-- optparse-applicative >= 0.14 && < 0.15
-- text >= 1.2 && < 1.3
 
 library:
   source-dirs: src
+  dependencies:
+    - split >= 0.2 && < 0.3
 
 executables:
   ion-fmt-exe:
@@ -38,6 +37,8 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - ion-fmt
+    - optparse-applicative >= 0.14 && < 0.15
+    - text >= 1.2 && < 1.3
 
 tests:
   ion-fmt-test:
@@ -49,3 +50,4 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - ion-fmt
+    - hspec >= 2.7 && < 2.8

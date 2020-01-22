@@ -1,6 +1,6 @@
 module Main where
 
-import Lib (formatString)
+import IonFmt (formatString)
 
 import Options.Applicative (Parser, strOption, long, metavar, execParser, info, (<**>), helper, fullDesc, progDesc, header)
 import Data.Text.IO as Text (readFile, writeFile)
