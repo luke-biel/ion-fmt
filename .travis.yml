@@ -1,0 +1,34 @@
+sudo: false
+
+dist: trusty
+
+language: generic
+
+cache:
+  timeout: 1000
+  directories:
+    - $HOME/.stack/
+    - $HOME/.local/bin/
+    - .stack-work/
+
+branches:
+  only:
+    - master
+
+install:
+  - set -e
+  - mkdir -p ~/.local/bin
+  - export PATH=~/.local/bin:$PATH
+  - if [[ ! -x ~/.local/bin/stack ]]; then travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'; chmod a+x ~/.local/bin/stack; fi
+  - which stack
+  - type -a stack
+  - stack --version
+  - echo ~
+  - ~/.local/bin/stack --version
+  - stack setup
+  - stack exec -- ghc --version
+  - if [[ ! -x ~/.local/bin/shelltest ]]; then stack install shelltestrunner-1.9; fi
+  - shelltest --version
+
+script:
+  - stack test
