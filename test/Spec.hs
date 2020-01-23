@@ -9,6 +9,10 @@ main =
   describe "IonFmt" $
   describe "Internal" $ do
     context "#writeWithLengths" specWriteWithLengths
+    context "#formatCsvLine" specFormatCsvLine
+    context "#formatSection" specFormatSection
+    context "#writeCell" specWriteCell
+    context "#splitPerSection" specSplitPerSection
     describe "Utils" $ do
       context "#isSectionHeader" specIsSectionHeader
       context "#isCsvLine" specIsCsvLine
