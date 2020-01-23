@@ -1,10 +1,10 @@
 module Internal where
 
-import IonFmt.Internal
-import Test.Hspec
+import           IonFmt.Internal
+import           Test.Hspec
 
--- writeCell :: DataAlignment -> String -> Int -> String
-specWriteCell = do
+-- formatCell :: DataAlignment -> String -> Int -> String
+specFormatCell = do
   it "should align left" $ f
       LeftAlign
       "data"
@@ -28,8 +28,8 @@ specWriteCell = do
     where
       f inputAlign inputStr inputInt expected = formatCell inputAlign inputStr inputInt `shouldBe` expected
 
--- writeWithLengths :: [String] -> [Int] -> String
-specWriteWithLengths = do
+-- formatCells :: [String] -> [Int] -> String
+specFormatCells = do
   it "should expand into valid ion CSV" $ f
       ["this", "is", "csv"]
       [6, 4, 5]
@@ -163,17 +163,17 @@ specSplitPerSection = do
         , "|value0| value1|" ]
       ]
   it "should handle dictionary sections" $ f
+      [ "[SECTION]"
+      , "test = true"
+      , "test_2 = { dict = \"yea\" }"
+      , "# random comment"
+      , "test_3 = 3.14" ]
+      [
         [ "[SECTION]"
         , "test = true"
         , "test_2 = { dict = \"yea\" }"
         , "# random comment"
         , "test_3 = 3.14" ]
-        [
-          [ "[SECTION]"
-          , "test = true"
-          , "test_2 = { dict = \"yea\" }"
-          , "# random comment"
-          , "test_3 = 3.14" ]
-        ]
+      ]
   where
     f input expected = splitPerSection input `shouldBe` expected

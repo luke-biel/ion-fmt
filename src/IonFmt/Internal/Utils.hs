@@ -1,18 +1,18 @@
 module IonFmt.Internal.Utils where
 
-import Data.Char (isSpace)
-import Data.List (dropWhileEnd)
-import Data.List.Split (splitOn, startsWith)
+import           Data.Char       (isSpace)
+import           Data.List       (dropWhileEnd)
+import           Data.List.Split (splitOn, startsWith)
 
 -- | Determine if input string is ion section header `[HEADER]`
 isSectionHeader :: String -> Bool
 isSectionHeader ('[':_) = True
-isSectionHeader _ = False
+isSectionHeader _       = False
 
 -- | Determine if selected String is ion CSV row
 isCsvLine :: String -> Bool
 isCsvLine ('|':_) = True
-isCsvLine _ = False
+isCsvLine _       = False
 
 -- | Strip string from trailing and leading whitespace
 strip :: String -> String

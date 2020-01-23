@@ -1,7 +1,7 @@
 module IonFmt.Internal.Csv where
 
-import IonFmt.Internal.Utils (isCsvLine, cellLength, strip)
-import Data.List.Split (splitOn)
+import           Data.List.Split       (splitOn)
+import           IonFmt.Internal.Utils (cellLength, isCsvLine, strip)
 
 -- | Get optimal column content length out of set of rows
 csvColumnLengths :: [String] -> [Int]
@@ -9,7 +9,7 @@ csvColumnLengths lines = findMaxLengths $ map cellLengths filteredLines
   where
     filteredLines = filter isCsvLine lines
     findMaxLengths (x:xs) = foldl (zipWith max) x xs
-    findMaxLengths [] = []
+    findMaxLengths []     = []
 
 -- | Split ion CSV row into cells
 splitCsvLine :: String -> [String]

@@ -34,7 +34,7 @@ formatSection (header:section) = intercalate "\n" $ header : map (`formatCsvLine
 
 formatCsvLine :: String -> [Int] -> String
 formatCsvLine line@('|':xs) lengths = formatCells (splitCsvLine line) lengths
-formatCsvLine line _ = line
+formatCsvLine line _                = line
 
 formatFiller :: [Int] -> String
 formatFiller lengths = '|' : intercalate "|" (map (`replicate` '-') lengths) ++ "|"
