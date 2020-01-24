@@ -24,7 +24,7 @@ specFormatCell = do
       CenterAlign
       "data"
       11
-      "    data   "
+      "   data    "
     where
       f inputAlign inputStr inputInt expected = formatCell inputAlign inputStr inputInt `shouldBe` expected
 
@@ -73,9 +73,9 @@ specFormatSection = do
       , "|2001-01-02|rain|100%|"
       , "|2001-01-03|hurracaine|5%|" ]
       [ "[CONFIG]"
-      , "| 2001-01-01 | sunny      | 80%  |"
+      , "| 2001-01-01 | sunny      |  80% |"
       , "| 2001-01-02 | rain       | 100% |"
-      , "| 2001-01-03 | hurracaine | 5%   |" ]
+      , "| 2001-01-03 | hurracaine |   5% |" ]
 
   it "should handle comments inside csv" $ f
       [ "[CONFIG]"
@@ -84,10 +84,10 @@ specFormatSection = do
       , "|2001-01-02|rain|100%|"
       , "|2001-01-03|hurracaine|5%|" ]
       [ "[CONFIG]"
-      , "| 2001-01-01 | sunny      | 80%  |"
+      , "| 2001-01-01 | sunny      |  80% |"
       , "# this is random comment"
       , "| 2001-01-02 | rain       | 100% |"
-      , "| 2001-01-03 | hurracaine | 5%   |" ]
+      , "| 2001-01-03 | hurracaine |   5% |" ]
 
   it "should handle comments at the end of row" $ f
       [ "[CONFIG]"
@@ -95,9 +95,9 @@ specFormatSection = do
       , "|2001-01-02|rain|100%|"
       , "|2001-01-03|hurracaine|5%|" ]
       [ "[CONFIG]"
-      , "| 2001-01-01 | sunny      | 80%  | # end of line comment"
+      , "| 2001-01-01 | sunny      |  80% | # end of line comment"
       , "| 2001-01-02 | rain       | 100% |"
-      , "| 2001-01-03 | hurracaine | 5%   |" ]
+      , "| 2001-01-03 | hurracaine |   5% |" ]
 
   it "should handle headers" $ f
       [ "[CONFIG]"
@@ -105,9 +105,9 @@ specFormatSection = do
       , "|-|-|-|"
       , "|2001-01-03|hurracaine|5%|" ]
       [ "[CONFIG]"
-      , "|     day    |   weather  | humidity |"
+      , "|    day     |  weather   | humidity |"
       , "|------------|------------|----------|"
-      , "| 2001-01-03 | hurracaine | 5%       |" ]
+      , "| 2001-01-03 | hurracaine |       5% |" ]
     where
       f input expected = formatSection input `shouldBe` init (unlines expected)
 

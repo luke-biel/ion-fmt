@@ -1,3 +1,5 @@
-module IonFmt (formatString) where
+module IonFmt
+  ( formatString
+  ) where
 
 import           IonFmt.Internal
