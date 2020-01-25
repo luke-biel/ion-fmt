@@ -1,9 +1,12 @@
 sudo: false
 
-os:
-  - linux
-  - osx
-  - windows
+matrix:
+  include:
+    - os: linux
+    - os: osx
+      if: tag IS present
+    - os: windows
+      if: tag IS present
 
 language: generic
 
@@ -23,7 +26,7 @@ install:
   - source ./.travis.${TRAVIS_OS_NAME}.env
   - mkdir -p ~/.local/bin
   - export PATH=~/.local/bin:$PATH
-  - if [[ ! -x ~/.local/bin/stack ]]; then travis_retry curl -L ${STACK_URL} | ${UNPACK_CMD} ~/.local/bin '*/stack'; chmod a+x ~/.local/bin/stack; fi
+  - if [[ ! -x ~/.local/bin/stack ]]; then travis_retry curl -L ${STACK_URL} | ${UNPACK_CMD} ~/.local/bin ${STACK_WILDCARD}; chmod a+x ~/.local/bin/stack; fi
   - which stack
   - type -a stack
   - stack --version
@@ -36,9 +39,9 @@ install:
 
 script:
   - stack test
-  - stack build --ghc-options -O2 # build artifact with optimizations
 
 before_deploy:
+  - stack build --ghc-options -O2 # build artifact with optimizations
   - mv "$(stack path --local-install-root)/bin/ion-fmt-exe" "$(stack path --local-install-root)/bin/ion-fmt-${TRAVIS_OS_NAME}"
 
 deploy:
