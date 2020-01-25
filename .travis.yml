@@ -1,12 +1,12 @@
 sudo: false
 
-matrix:
+jobs:
   include:
-    - os: linux
-    - os: osx
-      if: tag IS present
-    - os: windows
-      if: tag IS present
+  - os: linux
+  - os: osx
+    if: tag IS present
+  - os: windows
+    if: tag IS present
 
 language: generic
 
