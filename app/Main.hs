@@ -1,10 +1,12 @@
 module Main where
 
-import IonFmt (formatString)
+import           IonFmt              (formatString)
 
-import Options.Applicative (Parser, strOption, long, metavar, execParser, info, (<**>), helper, fullDesc, progDesc, header)
-import Data.Text.IO as Text (readFile, writeFile)
-import Data.Text (unpack, pack)
+import           Data.Text           (pack, unpack)
+import           Data.Text.IO        as Text (readFile, writeFile)
+import           Options.Applicative (Parser, execParser, fullDesc, header,
+                                      helper, info, long, metavar, progDesc,
+                                      strOption, (<**>))
 
 newtype Args = Args{path :: FilePath}
 

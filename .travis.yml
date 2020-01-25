@@ -1,6 +1,9 @@
 sudo: false
 
-dist: trusty
+os:
+  - linux
+  - osx
+  - windows
 
 language: generic
 
@@ -17,9 +20,10 @@ branches:
 
 install:
   - set -e
+  - source ./.travis.${TRAVIS_OS_NAME}.env
   - mkdir -p ~/.local/bin
   - export PATH=~/.local/bin:$PATH
-  - if [[ ! -x ~/.local/bin/stack ]]; then travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'; chmod a+x ~/.local/bin/stack; fi
+  - if [[ ! -x ~/.local/bin/stack ]]; then travis_retry curl -L ${STACK_URL} | ${UNPACK_CMD} ~/.local/bin '*/stack'; chmod a+x ~/.local/bin/stack; fi
   - which stack
   - type -a stack
   - stack --version
@@ -32,3 +36,16 @@ install:
 
 script:
   - stack test
+  - stack build --ghc-options -O2 # build artifact with optimizations
+
+before_deploy:
+  - mv "$(stack path --local-install-root)/bin/ion-fmt-exe" "$(stack path --local-install-root)/bin/ion-fmt-${TRAVIS_OS_NAME}"
+
+deploy:
+  - provider: releases
+    api_key: $GITHUB_OAUTH_TOKEN
+    file: "$(stack path --local-install-root)/bin/ion-fmt-${TRAVIS_OS_NAME}"
+    skip_cleanup: true
+    on:
+      branch: master
+      tags: true
