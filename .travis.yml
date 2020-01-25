@@ -1,5 +1,3 @@
-sudo: false
-
 jobs:
   include:
   - os: linux
@@ -16,10 +14,6 @@ cache:
     - $HOME/.stack/
     - $HOME/.local/bin/
     - .stack-work/
-
-branches:
-  only:
-    - master
 
 install:
   - set -e
